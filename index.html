@@ -1,391 +1,180 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Fundación Tanatológica Alejo. Acompañamiento humano en procesos de duelo, encuentros, recursos y conversaciones sobre la muerte y la trascendencia." />
-  <title>Fundación Tanatológica Alejo</title>
-  <style>
-    :root{
-      --ivory:#f6f0e6;
-      --paper:#fffaf3;
-      --chocolate:#4c2f26;
-      --chocolate-2:#6d4739;
-      --gold:#b99a5e;
-      --gold-soft:#d8c08d;
-      --ink:#2e2521;
-      --muted:#786a63;
-      --line:rgba(76,47,38,.14);
-      --shadow:0 18px 40px rgba(76,47,38,.10);
-    }
+<!-- INICIO: presentación de Isabel y música para Alejo -->
+<style>
+  .menu{white-space:nowrap}
+  .mobile-panel{overflow-y:auto;overscroll-behavior:contain}
+  .foundation-layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:36px;align-items:start}
+  .foundation-layout .section-intro{margin-top:0;margin-bottom:26px}
+  .foundation-layout .about-grid{grid-template-columns:1fr;gap:18px}
+  .profile-card{background:var(--paper,#fffaf3);border:1px solid rgba(185,154,94,.42);border-radius:24px;padding:32px;box-shadow:var(--shadow);scroll-margin-top:100px}
+  .profile-card h3{font-family:Georgia,serif;font-size:32px;line-height:1.2;font-weight:500;color:var(--chocolate,#4c2f26);margin:0 0 10px}
+  .profile-role{font-size:13px;color:var(--muted,#786a63);margin:0 0 24px}
+  .profile-credentials{padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:24px}
+  .profile-degree{font-family:Georgia,serif;font-size:23px;line-height:1.35;color:var(--chocolate,#4c2f26);margin:0 0 8px}
+  .profile-institution{font-size:12px;letter-spacing:.05em;color:var(--muted,#786a63);margin:0 0 18px}
+  .profile-professions{font-size:16px;font-weight:600;color:var(--chocolate-2,#6d4739);margin:0}
+  .profile-story{font-size:16px;color:#65574f;margin:0 0 16px}
+  .profile-signature{font-family:Georgia,serif;font-size:20px;font-style:italic;line-height:1.45;color:var(--chocolate-2,#6d4739);margin:24px 0 0}
+  .alejo-media{min-width:0}
+  .alejo-music{margin-top:18px;padding:20px;border:1px solid rgba(216,192,141,.35);border-radius:22px;background:rgba(255,250,243,.05)}
+  .alejo-music summary{display:flex;align-items:center;gap:12px;cursor:pointer;list-style:none;color:#fff7ec;font-family:Georgia,serif;font-size:20px;line-height:1.3}
+  .alejo-music summary::-webkit-details-marker{display:none}
+  .alejo-music summary:focus-visible{outline:2px solid #d8c08d;outline-offset:7px;border-radius:4px}
+  .alejo-music summary:after{content:"+";margin-left:auto;color:#d8c08d;font-size:24px}
+  .alejo-music[open] summary:after{content:"−"}
+  .alejo-music summary small{display:block;font-family:system-ui,sans-serif;font-size:12px;line-height:1.5;color:#e7dbd2;margin-top:5px}
+  .alejo-music-icon{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border:1px solid rgba(216,192,141,.5);border-radius:50%;color:#d8c08d;font-size:15px}
+  .alejo-music-player{margin-top:20px;border-radius:14px;overflow:hidden;background:#201613}
+  .alejo-music-player iframe{display:block;width:100%;aspect-ratio:16/9;min-height:200px;border:0}
+  .alejo-music-credit{font-size:12px;color:#e7dbd2;margin:14px 0 0}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      color:var(--ink);
-      background:var(--ivory);
-      line-height:1.6;
-    }
-    body.menu-open{overflow:hidden}
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1120px,calc(100% - 36px));margin:0 auto}
-
-    .topbar{
-      position:sticky;top:0;z-index:30;
-      backdrop-filter:blur(14px);
-      background:rgba(246,240,230,.94);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{display:flex;align-items:center;justify-content:space-between;min-height:76px;gap:24px;position:relative}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.02em;min-width:0}
-    .brand-mark{
-      width:44px;height:44px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;
-      border:1px solid rgba(185,154,94,.55);color:var(--gold);
-      font-family:Georgia,serif;font-size:24px;background:rgba(255,255,255,.38);
-    }
-    .brand-copy{min-width:0}
-    .brand-title{font-family:Georgia,serif;color:var(--chocolate);font-size:17px;font-weight:600;white-space:nowrap}
-    .brand-copy small{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
-    .menu{display:flex;gap:26px;font-size:14px;color:#4d403a}
-    .menu a:hover{color:var(--gold)}
-    .menu-btn{display:none;border:1px solid var(--line);background:rgba(255,255,255,.45);width:44px;height:44px;border-radius:50%;font-size:24px;color:var(--chocolate);cursor:pointer}
-
-    .hero{
-      position:relative;overflow:hidden;
-      padding:92px 0 82px;
-      background:
-        radial-gradient(circle at 82% 22%,rgba(185,154,94,.22),transparent 27%),
-        radial-gradient(circle at 70% 75%,rgba(76,47,38,.08),transparent 30%),
-        linear-gradient(135deg,#fffaf4 0%,#f5eadc 100%);
-    }
-    .hero:after{
-      content:"A";position:absolute;right:-40px;bottom:-125px;
-      font-family:Georgia,serif;font-size:520px;line-height:1;color:rgba(76,47,38,.035);pointer-events:none;
-    }
-    .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center;position:relative;z-index:1}
-    .eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:12px;color:var(--gold);font-weight:800;margin-bottom:18px}
-    h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(44px,7vw,78px);line-height:1.02;margin:0 0 24px;color:var(--chocolate);font-weight:500}
-    .lead{font-size:20px;max-width:680px;color:#574840;margin-bottom:28px}
-    .hero-quote{font-family:Georgia,serif;font-size:24px;line-height:1.45;color:var(--chocolate-2);margin:26px 0 32px;max-width:670px}
-    .actions{display:flex;flex-wrap:wrap;gap:14px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:999px;font-weight:700;font-size:14px;border:1px solid transparent;transition:.2s ease}
-    .btn-primary{background:var(--chocolate);color:white;box-shadow:0 10px 24px rgba(76,47,38,.18)}
-    .btn-primary:hover{transform:translateY(-1px);background:#3f271f}
-    .btn-secondary{border-color:rgba(76,47,38,.24);color:var(--chocolate);background:rgba(255,255,255,.45)}
-
-    .identity-card{
-      min-height:430px;border-radius:34px;box-shadow:var(--shadow);position:relative;overflow:hidden;
-      background:linear-gradient(160deg,#4d2f26 0%,#6f4a3d 62%,#9f7a5f 100%);
-      color:#fff;display:flex;align-items:flex-end;padding:34px;
-    }
-    .identity-card:before{content:"";position:absolute;inset:28px;border:1px solid rgba(216,192,141,.42);border-radius:26px}
-    .identity-mark{position:absolute;inset:0;display:grid;place-items:center;transform:translateY(-18px)}
-    .identity-ring{width:210px;height:210px;border-radius:50%;border:1px solid rgba(240,217,171,.62);display:grid;place-items:center;position:relative;box-shadow:inset 0 0 0 18px rgba(255,255,255,.025)}
-    .identity-a{font-family:Georgia,serif;font-size:118px;color:rgba(255,247,236,.9);font-weight:400;line-height:1;transform:translateY(-8px)}
-    .smile{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);width:92px;height:34px;border-bottom:4px solid var(--gold-soft);border-radius:0 0 70px 70px;opacity:.95}
-    .star{position:absolute;right:42px;top:42px;color:var(--gold-soft);font-size:22px;opacity:.8}
-    .identity-copy{position:relative;z-index:2;max-width:340px}
-    .identity-copy strong{display:block;font-family:Georgia,serif;font-size:28px;font-weight:500;margin-bottom:8px;color:#f7ead0}
-    .identity-copy span{font-size:14px;color:#eadfce;display:block}
-
-    section{padding:80px 0}
-    .section-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);font-weight:800;margin-bottom:10px}
-    .section-title{font-family:Georgia,serif;color:var(--chocolate);font-size:42px;line-height:1.15;margin:0 0 18px;font-weight:500}
-    .section-intro{max-width:760px;color:var(--muted);font-size:18px;margin-bottom:36px}
-
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px}
-    .panel{background:rgba(255,255,255,.58);border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:0 12px 28px rgba(76,47,38,.05)}
-    .panel h3{font-family:Georgia,serif;font-size:28px;color:var(--chocolate);margin:0 0 12px;font-weight:500}
-    .panel p{margin:0;color:#65574f}
-
-    .services{background:#f1e8da}
-    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    .card{background:#fffaf4;border:1px solid var(--line);border-radius:22px;padding:26px;min-height:205px}
-    .num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(185,154,94,.12);color:var(--gold);font-weight:800;margin-bottom:22px}
-    .card h3{font-family:Georgia,serif;color:var(--chocolate);font-size:23px;margin:0 0 10px;font-weight:500}
-    .card p{margin:0;color:var(--muted);font-size:15px}
-
-    .alejo{background:var(--chocolate);color:#fff;padding:88px 0;position:relative;overflow:hidden}
-    .alejo:after{content:"";position:absolute;width:390px;height:390px;border:1px solid rgba(216,192,141,.12);border-radius:50%;right:-150px;top:-100px}
-    .alejo .section-kicker{color:var(--gold-soft)}
-    .alejo .section-title{color:#fff7ec;font-size:46px}
-    .alejo-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:58px;align-items:center;position:relative;z-index:1}
-    .alejo-visual{aspect-ratio:4/5;border-radius:32px;border:1px solid rgba(216,192,141,.45);background:linear-gradient(145deg,#6b493b,#3e2720);position:relative;overflow:hidden;display:grid;place-items:center}
-    .alejo-visual:before{content:"";position:absolute;inset:26px;border:1px solid rgba(255,255,255,.12);border-radius:24px}
-    .alejo-mark{width:190px;height:190px;border:1px solid rgba(240,217,171,.55);border-radius:50%;display:grid;place-items:center;position:relative}
-    .alejo-mark span{font-family:Georgia,serif;font-size:112px;color:#f4e4c4;line-height:1;transform:translateY(-6px)}
-    .alejo-mark:after{content:"";position:absolute;width:82px;height:30px;border-bottom:4px solid var(--gold-soft);border-radius:0 0 70px 70px;bottom:37px}
-    .alejo-label{position:absolute;left:26px;right:26px;bottom:24px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#d8cbbf}
-    .alejo-copy p{color:#e7dbd2;font-size:18px;max-width:650px}
-    .alejo-highlight{margin:28px 0;padding:22px 0;border-top:1px solid rgba(216,192,141,.28);border-bottom:1px solid rgba(216,192,141,.28);font-family:Georgia,serif;font-size:25px;line-height:1.45;color:#f6e6c7}
-    .signature{font-family:Georgia,serif;color:#f0d9ab;font-size:31px;margin-top:24px}
-
-    .quote-band{text-align:center;background:#fffaf3;padding:70px 0}
-    .quote-band blockquote{font-family:Georgia,serif;color:var(--chocolate);font-size:clamp(30px,4vw,48px);line-height:1.25;max-width:900px;margin:0 auto 18px}
-    .quote-band p{color:var(--muted);margin:0}
-
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
-    .contact-box{background:white;border-radius:28px;border:1px solid var(--line);padding:34px}
-    .contact-box h3{font-family:Georgia,serif;color:var(--chocolate);font-size:28px;margin:0 0 12px;font-weight:500}
-    .contact-list{display:grid;gap:12px;margin-top:22px;color:#5e514a}
-    .contact-item{padding:14px 0;border-top:1px solid var(--line)}
-
-    footer{background:#2f1e19;color:#d9ccc4;padding:34px 0;font-size:13px}
-    .footer-inner{display:flex;justify-content:space-between;gap:24px;align-items:center}
-    .footer-name{font-family:Georgia,serif;color:#f1dfbb;font-size:19px}
-
-    .mobile-panel{display:none}
-
-    @media(max-width:900px){
-      .brand-title{font-size:15px}
-      .brand-copy small{font-size:9px;letter-spacing:.11em}
-      .menu{display:none}
-      .menu-btn{display:grid;place-items:center}
-      .mobile-panel{display:block;position:fixed;inset:76px 0 0 0;z-index:25;background:rgba(246,240,230,.98);transform:translateY(-120%);transition:transform .26s ease;border-top:1px solid var(--line)}
-      .mobile-panel.open{transform:translateY(0)}
-      .mobile-panel nav{display:flex;flex-direction:column;padding:28px 24px;gap:0}
-      .mobile-panel a{font-family:Georgia,serif;color:var(--chocolate);font-size:28px;padding:16px 0;border-bottom:1px solid var(--line)}
-      .hero-grid,.about-grid,.alejo-grid,.contact-grid{grid-template-columns:1fr}
-      .hero{padding-top:62px}.identity-card{min-height:360px}
-      .cards{grid-template-columns:1fr 1fr}
-      .alejo-grid{gap:34px}.alejo-visual{max-width:520px;width:100%}
-    }
-    @media(max-width:620px){
-      .container{width:min(100% - 28px,1120px)}
-      .nav{min-height:70px}
-      .brand-mark{width:40px;height:40px;font-size:21px}
-      .brand-title{font-size:14px}
-      .brand-copy small{font-size:8px}
-      .mobile-panel{inset:70px 0 0 0}
-      .hero{padding:54px 0 58px}
-      h1{font-size:46px}
-      .lead{font-size:18px}
-      .hero-quote{font-size:21px}
-      .identity-card{min-height:330px;padding:28px}
-      .identity-ring{width:180px;height:180px}.identity-a{font-size:102px}.smile{bottom:42px;width:80px}
-      .cards{grid-template-columns:1fr}
-      section{padding:62px 0}
-      .section-title,.alejo .section-title{font-size:35px}
-      .section-intro{font-size:17px}
-      .alejo-highlight{font-size:22px}
-      .footer-inner{flex-direction:column;align-items:flex-start}
-    }
-  </style>
-</head>
-<body>
-<header class="topbar">
-  <div class="container nav">
-    <a class="brand" href="#inicio" aria-label="Fundación Tanatológica Alejo">
-      <div class="brand-mark">A</div>
-      <div class="brand-copy">
-        <div class="brand-title">Fundación Tanatológica Alejo</div>
-        <small>duelo · acompañamiento · trascendencia</small>
-      </div>
-    </a>
-    <nav class="menu" aria-label="Navegación principal">
-      <a href="#fundacion">La Fundación</a>
-      <a href="#acompanamiento">Acompañamiento</a>
-      <a href="#alejo">Alejo</a>
-      <a href="#recursos">Recursos</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
-  </div>
-</header>
-
-<div class="mobile-panel" id="mobilePanel" aria-hidden="true">
-  <nav aria-label="Navegación móvil">
-    <a href="#fundacion">La Fundación</a>
-    <a href="#acompanamiento">Acompañamiento</a>
-    <a href="#alejo">Alejo</a>
-    <a href="#recursos">Recursos</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-</div>
-
-<main id="inicio">
-  <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Fundación Tanatológica Alejo</div>
-        <h1>Rompamos el silencio.<br>Hablemos de la muerte.</h1>
-        <p class="lead">Acompañamos el duelo con humanidad, escucha y sentido. Hablamos de la ausencia, del amor que permanece y de cómo volver a vivir de otra manera.</p>
-        <div class="hero-quote">“Nacer y morir son hechos naturales de la vida. Hay muertes para las que nadie está preparado.”</div>
-        <div class="actions">
-          <a class="btn btn-primary" href="#acompanamiento">Encontrá acompañamiento</a>
-          <a class="btn btn-secondary" href="#fundacion">Conocé la Fundación</a>
-        </div>
-      </div>
-      <div class="identity-card" aria-label="Símbolo de Fundación Tanatológica Alejo">
-        <div class="identity-mark" aria-hidden="true">
-          <div class="identity-ring">
-            <div class="identity-a">A</div>
-            <div class="smile"></div>
-            <div class="star">✦</div>
-          </div>
-        </div>
-        <div class="identity-copy">
-          <strong>Una presencia que transforma.</strong>
-          <span>Una identidad inspirada en Alejo: memoria, amor y una sonrisa que sigue acompañando.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="fundacion">
-    <div class="container">
-      <div class="section-kicker">La Fundación</div>
-      <h2 class="section-title">Un lugar para nombrar lo que duele y sostener lo que permanece.</h2>
-      <p class="section-intro">La Fundación Tanatológica Alejo nace para acompañar a personas y familias atravesadas por una pérdida, abrir conversación sobre la muerte y ofrecer herramientas para reconstruir sentido.</p>
-      <div class="about-grid">
-        <div class="panel">
-          <h3>Nuestra misión</h3>
-          <p>Acompañar el duelo desde una mirada humana, respetuosa y consciente, con escucha, encuentros, formación y recursos.</p>
-        </div>
-        <div class="panel">
-          <h3>Nuestra mirada</h3>
-          <p>No buscamos borrar la ausencia. Buscamos aprender a vivir con ella, reconocer el amor que continúa y abrir un camino posible hacia adelante.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="services" id="acompanamiento">
-    <div class="container">
-      <div class="section-kicker">Acompañamiento</div>
-      <h2 class="section-title">Diferentes maneras de estar cerca.</h2>
-      <p class="section-intro">Proyectamos espacios de acompañamiento y formación para personas, familias y comunidades atravesadas por la pérdida.</p>
-      <div class="cards">
-        <article class="card">
-          <div class="num">01</div>
-          <h3>Escucha y orientación</h3>
-          <p>Primera escucha, orientación y derivación responsable cuando sea necesaria.</p>
-        </article>
-        <article class="card">
-          <div class="num">02</div>
-          <h3>Encuentros y charlas</h3>
-          <p>Conversaciones sobre duelo, vínculos, memoria, espiritualidad y reconstrucción de sentido.</p>
-        </article>
-        <article class="card">
-          <div class="num">03</div>
-          <h3>Podcast</h3>
-          <p>Testimonios, entrevistas y reflexiones para romper el silencio y acercar acompañamiento.</p>
-        </article>
-        <article class="card">
-          <div class="num">04</div>
-          <h3>Formación</h3>
-          <p>Futuras propuestas vinculadas con tanatología, duelo y acompañamiento humano.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- VOCES QUE ACOMPAÑAN -->
-  <section id="voces" style="background:#f1e8da;padding:20px 0 55px;">
-    <div class="container">
-      <details style="background:#fffaf4;border:1px solid #d8c8b3;border-radius:20px;padding:24px;">
-        <summary style="cursor:pointer;color:#4c2f26;">
-          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
-            <div style="background:#fff;border-radius:14px;padding:12px;text-align:center;min-width:100px;">
-              <img src="https://i.scdn.co/image/ab6765630000ba8a4d1dc7cbf9fba17d9ddb5053" alt="Imagen de Abrazos de Esperanzas" style="width:90px;height:90px;object-fit:contain;">
-            </div>
-            <div style="flex:1;min-width:180px;">
-              <span style="font-size:11px;letter-spacing:2px;color:#9b795a;">PROYECTO INVITADO</span>
-              <h3 style="font-family:Georgia,serif;font-size:26px;font-weight:normal;margin:8px 0;">Voces que acompañan</h3>
-              <p style="font-size:14px;margin:5px 0;">Abrazos de Esperanzas</p>
-              <span style="font-size:13px;color:#876a53;">Tocá para ver sus videos &#9662;</span>
-            </div>
-          </div>
-        </summary>
-        <div style="margin-top:24px;border-top:1px solid #d8c8b3;padding-top:22px;">
-          <p style="color:#4c2f26;margin-bottom:16px;">Testimonios y conversaciones para acompañar a quienes atraviesan el duelo.</p>
-          <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UUmMf-UXmfJ9eTeQxXdhKN3w" title="Videos de Abrazos de Esperanzas" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;"></iframe>
-          <p style="font-size:12px;margin-top:15px;">
-            Contenido de un proyecto independiente.
-            <a href="https://www.youtube.com/channel/UCmMf-UXmfJ9eTeQxXdhKN3w/videos" target="_blank" rel="noopener noreferrer" style="color:#4c2f26;text-decoration:underline;">Visitar el canal original</a>
-          </p>
-        </div>
-      </details>
-    </div>
-  </section>
-  <!-- FIN VOCES QUE ACOMPAÑAN -->
-
-  <section class="alejo" id="alejo">
-    <div class="container alejo-grid">
-      <div class="alejo-visual" aria-label="Símbolo homenaje a Alejo">
-        <div class="alejo-mark"><span>A</span></div>
-        <div class="alejo-label">Alejo · memoria que se vuelve presencia</div>
-      </div>
-      <div class="alejo-copy">
-        <div class="section-kicker">Por qué Alejo</div>
-        <h2 class="section-title">Un nombre nacido del amor.</h2>
-        <p>Alejo da nombre a esta Fundación porque su vida y su ausencia abrieron una pregunta que muchas familias conocen: ¿cómo se sigue viviendo cuando alguien esencial ya no está físicamente?</p>
-        <div class="alejo-highlight">La respuesta no es olvidar. Es aprender a llevar el amor de otra manera y convertirlo en presencia para otros.</div>
-        <p>La Fundación nace desde esa transformación: acompañar, escuchar y crear espacios donde la muerte pueda ser nombrada sin miedo y el duelo pueda encontrar sostén.</p>
-        <div class="signature">Para dar más amor.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="quote-band" id="recursos">
-    <div class="container">
-      <blockquote>“Hablar de la muerte no le quita valor a la vida. Puede enseñarnos a vivirla con mayor conciencia.”</blockquote>
-      <p>Próximamente: artículos, podcast, testimonios, recursos y agenda de actividades.</p>
-    </div>
-  </section>
-
-  <section id="contacto">
-    <div class="container">
-      <div class="section-kicker">Contacto</div>
-      <h2 class="section-title">Estamos construyendo este espacio para estar cerca.</h2>
-      <div class="contact-grid">
-        <div class="contact-box">
-          <h3>Fundación Tanatológica Alejo</h3>
-          <p>Próximamente incorporaremos los canales oficiales de contacto y redes sociales.</p>
-          <div class="contact-list">
-            <div class="contact-item"><strong>Ubicación:</strong> Pampa del Infierno, Chaco</div>
-            <div class="contact-item"><strong>WhatsApp:</strong> próximamente</div>
-            <div class="contact-item"><strong>Correo:</strong> próximamente</div>
-          </div>
-        </div>
-        <div class="contact-box">
-          <h3>Recibí novedades</h3>
-          <p>Más adelante podrás recibir información sobre charlas, encuentros, podcast y actividades de la Fundación.</p>
-          <div class="actions" style="margin-top:24px">
-            <a class="btn btn-primary" href="#contacto">Quiero recibir novedades</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="container footer-inner">
-    <div class="footer-name">Fundación Tanatológica Alejo</div>
-    <div>Rompamos el silencio. Hablemos de la muerte.</div>
-    <div>© 2026 · Todos los derechos reservados</div>
-  </div>
-</footer>
-
-<script>
-  const menuBtn = document.getElementById('menuBtn');
-  const mobilePanel = document.getElementById('mobilePanel');
-  const mobileLinks = mobilePanel.querySelectorAll('a');
-
-  function setMenu(open){
-    mobilePanel.classList.toggle('open', open);
-    mobilePanel.setAttribute('aria-hidden', String(!open));
-    menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.textContent = open ? '×' : '☰';
-    document.body.classList.toggle('menu-open', open);
+  @media(min-width:901px) and (max-width:1100px){
+    .nav{gap:16px}
+    .brand-title{font-size:15px}
+    .menu{gap:14px;font-size:13px}
   }
 
-  menuBtn.addEventListener('click', () => setMenu(!mobilePanel.classList.contains('open')));
-  mobileLinks.forEach(link => link.addEventListener('click', () => setMenu(false)));
-  window.addEventListener('resize', () => { if(window.innerWidth > 900) setMenu(false); });
+  @media(max-width:900px){
+    .foundation-layout{grid-template-columns:1fr}
+    .alejo-media{max-width:520px;width:100%}
+  }
+
+  @media(max-width:620px){
+    .profile-card{padding:26px;scroll-margin-top:90px}
+    .profile-card h3{font-size:29px}
+  }
+</style>
+
+<script>
+(() => {
+  const foundation = document.querySelector('#fundacion .container');
+
+  if (foundation && !document.getElementById('quienes-somos')) {
+    let layout = foundation.querySelector('.foundation-layout');
+
+    if (!layout) {
+      layout = document.createElement('div');
+      layout.className = 'foundation-layout';
+
+      const copy = document.createElement('div');
+      const intro = foundation.querySelector('.section-intro');
+      const panels = foundation.querySelector('.about-grid');
+
+      if (intro) copy.appendChild(intro);
+      if (panels) copy.appendChild(panels);
+
+      layout.appendChild(copy);
+      foundation.appendChild(layout);
+    }
+
+    layout.insertAdjacentHTML('beforeend', `
+      <aside class="profile-card" id="quienes-somos"
+             aria-labelledby="profile-name">
+
+        <div class="section-kicker">Quiénes somos</div>
+        <h3 id="profile-name">Isabel Elisa Strizik</h3>
+
+        <p class="profile-role">
+          Impulsora de la Fundación Tanatológica Alejo
+        </p>
+
+        <div class="profile-credentials" aria-label="Formación">
+          <p class="profile-degree">
+            Diplomada en Tanatología y Logoterapia
+          </p>
+          <p class="profile-institution">
+            CRAPTICA/PRACTIS SAC · 2026
+          </p>
+          <p class="profile-professions">
+            Abogada, escriba y mediadora
+          </p>
+        </div>
+
+        <p class="profile-story">
+          La partida de mi hijo Alejo me llevó a buscar nuevas formas
+          de comprender el duelo y de dar un lugar al amor que permanece.
+        </p>
+
+        <p class="profile-story">
+          De esa experiencia y de mi formación nace este proyecto:
+          acompañar a quienes atraviesan una pérdida, abrir conversaciones
+          sobre la muerte y transformar la memoria en obras de amor.
+        </p>
+
+        <p class="profile-signature">
+          Estamos heridos, pero podemos seguir amando.
+        </p>
+      </aside>
+    `);
+  }
+
+  if (document.getElementById('quienes-somos')) {
+    document.querySelectorAll('.menu, #mobilePanel nav').forEach(nav => {
+      if (nav.querySelector('a[href="#quienes-somos"]')) return;
+
+      const link = document.createElement('a');
+      link.href = '#quienes-somos';
+      link.textContent = 'Quiénes somos';
+
+      nav.insertBefore(link, nav.querySelector('a[href="#contacto"]'));
+
+      if (nav.closest('#mobilePanel')) {
+        link.addEventListener('click', () => {
+          if (typeof setMenu === 'function') setMenu(false);
+        });
+      }
+    });
+  }
+
+  const photo = document.querySelector('#alejo .alejo-visual');
+
+  if (photo && !document.getElementById('alejoMusic')) {
+    let media = photo.closest('.alejo-media');
+
+    if (!media) {
+      media = document.createElement('div');
+      media.className = 'alejo-media';
+      photo.before(media);
+      media.appendChild(photo);
+    }
+
+    media.insertAdjacentHTML('beforeend', `
+      <details class="alejo-music" id="alejoMusic">
+        <summary>
+          <span class="alejo-music-icon" aria-hidden="true">▶</span>
+          <span>
+            Una canción para Alejo
+            <small>Cómo olvidarme · La Beriso</small>
+          </span>
+        </summary>
+
+        <div class="alejo-music-player">
+          <iframe
+            id="alejoSong"
+            title="Cómo olvidarme de La Beriso: fragmento para Alejo"
+            data-src="https://www.youtube-nocookie.com/embed/uo8qDCDZhK0?start=246&amp;end=271&amp;autoplay=0&amp;playsinline=1&amp;rel=0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <p class="alejo-music-credit">
+          La Beriso · Video de su canal oficial LaBerisoVEVO.
+        </p>
+      </details>
+    `);
+
+    const music = document.getElementById('alejoMusic');
+    const player = document.getElementById('alejoSong');
+
+    music.addEventListener('toggle', () => {
+      if (music.open) {
+        player.setAttribute('src', player.dataset.src);
+      } else {
+        player.removeAttribute('src');
+      }
+    });
+  }
+})();
 </script>
-</body>
-</html>
+<!-- FIN: presentación de Isabel y música para Alejo -->
